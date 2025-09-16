@@ -1,0 +1,3 @@
+primeiro, sinal = int(input()), input()
+segundo = int(input())
+print(primeiro - segundo) if sinal == '-' else(print(primeiro + segundo) if sinal == '+' else(print(primeiro * segundo) if sinal == '*' else(print(primeiro // segundo) if (sinal== '/') and (segundo != 0) else print('Alerta! Alguém tentou usar um operador que não existe. Só um idiota faria isso. Provavelmente o Jim. Isso é claramente uma tentativa de sabotagem corporativa.'))))
