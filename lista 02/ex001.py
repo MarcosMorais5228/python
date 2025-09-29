@@ -26,14 +26,14 @@ for i in range(0,numero_participantes):
         if(palavras_diferentes == 5) and (primeira_palavra != palavra_atual):
             print(f'Caramba, que confusão! A palavra {primeira_palavra} já tá toda embaralhada e virou {palavra_falada}!')
 
-if(palavras_diferentes == 1) and (primeira_palavra == ultima_palavra):
+if(palavras_diferentes == 0) and (primeira_palavra == ultima_palavra):
     print(f'Impressionante, todos os jogadores ouviram e falaram perfeitamente a palavra {primeira_palavra}! Talvez os telefones modernos comecem a perder espaço pra moda antiga.')
-elif(palavras_diferentes > 1) and (primeira_palavra == ultima_palavra):
+elif(palavras_diferentes > 0) and (primeira_palavra == ultima_palavra):
     print(f'Parece que ocorreram {palavras_diferentes} trocas durante o processo, mas mesmo com essa pequena confusão, a palavra {primeira_palavra} conseguiu chegar no fim do telefone sem fio.')
 
-if(palavras_diferentes == 2) and (primeira_palavra != ultima_palavra):
+if(palavras_diferentes == 1) and (primeira_palavra != ultima_palavra):
     print(f'Poxa, foi por pouco, só quem errou foi {jogador_errou} que disse {palavra_errada} ao invés de {primeira_palavra}…')
-elif(palavras_diferentes == 3) and (primeira_palavra != ultima_palavra):
+elif(palavras_diferentes == 2) and (primeira_palavra != ultima_palavra):
     print(f'Se não fosse pelos erros de {jogador_errou} e {jogador2_errou} a palavra {primeira_palavra} poderia ter chegado até o fim, talvez eles devessem tentar de novo.')
-elif(palavras_diferentes > 3) and (primeira_palavra != ultima_palavra):
+elif(palavras_diferentes > 2) and (primeira_palavra != ultima_palavra):
     print(f'É, parece que os alunos se confundiram bastante durante a brincadeira e a palavra {primeira_palavra} acabou virando {ultima_palavra}. No total, ocorreram {palavras_diferentes} trocas.')
