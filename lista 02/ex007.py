@@ -44,12 +44,12 @@ while ((i <= partidas) and ((pontos_arthur < (partidas//2 + 1)) and (pontos_joao
             if(numero == b*b):
                 y = False
 
-        if(y == False):
+        if(y == False) or (numero == 0):
             print('O número é um quadrado perfeito! Arthur consegue puxar mais forte.')
             resistencia_arthur += 1
             resistencia_joao -= 1
         
-        elif(x == True):
+        elif(x == True) and (numero != 0) and (numero != 1):
             print('O primo do primo é primo do primo? João puxa mais forte!')
             resistencia_arthur -= 1
             resistencia_joao += 1
@@ -78,7 +78,7 @@ print(f'Placar final: {pontos_arthur} X {pontos_joao}')
 
 if(pontos_arthur > pontos_joao):
     if(pontos_joao == 0):
-        print('Jõao não teve chance! Arthur venceu todas as partidas.')
+        print('João não teve chance! Arthur venceu todas as partidas.')
     else:
         print(f'O ganhador foi Arthur com uma diferença de {pontos_arthur - pontos_joao} partidas.')
 
