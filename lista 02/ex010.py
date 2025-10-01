@@ -24,6 +24,7 @@ for i in range(0, rodadas):
                 comum = comum + letra
         
     testadas = ""
+    letras_chutadas = ""
 
     while (vidas > 0):
 
@@ -72,8 +73,10 @@ for i in range(0, rodadas):
                 
             if(testadas == ""):
                 testadas = testadas + letra
+                letras_chutadas = letras_chutadas + testadas
                 
             else:
                 testadas = testadas + ", " + letra
+                letras_chutadas = letras_chutadas + testadas
 
         
