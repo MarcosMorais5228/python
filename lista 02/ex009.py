@@ -47,6 +47,7 @@ for i in range(0, rodadas):
         if(y == False) or (x == False):
             print(f'O número da soma é {soma}, que faz parte da sequência de Fibonacci!! {jogador1} tropeça!')
             tropecos_jogador1 += 1
+            pulos -= ritmo
         
         else:
             if(pulos < aposta/4) and (frase == 0):
