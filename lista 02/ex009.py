@@ -1,4 +1,4 @@
-print('INICIANDO SIMULAÇÃO…')
+print('INICIANDO SIMULAÇÃO...')
 pontosarthur = 0
 pontossamuel = 0
 
@@ -29,7 +29,7 @@ for i in range(0, rodadas):
 
     print(f'{jogador2} aposta que {jogador1} não chega a {aposta} pulos! Vamos ver se é verdade! O ritmo de {jogador1} será {ritmo}!')
 
-    while(tropecos_jogador1 != 3) and (pulos >= 0):
+    while(tropecos_jogador1 != 3) and (pulos > 0):
         numero = str(pulos)
         soma = 0
         y = True
@@ -45,7 +45,7 @@ for i in range(0, rodadas):
             if(5*(soma**2)-4 == b*b):
                 y = False
         
-        if(y == False) or (x == False):
+        if((y == False) or (x == False)) and (soma != 0):
             print(f'O número da soma é {soma}, que faz parte da sequência de Fibonacci!! {jogador1} tropeça!')
             tropecos_jogador1 += 1
             pulos -= ritmo
