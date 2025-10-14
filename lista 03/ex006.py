@@ -54,7 +54,7 @@ for i in range(numero_desfilantes):
         
         # entrada invasor
         else: 
-            desfilante.append(tentativa)
+            desfilante.append(tentativa[i])
             invasao += 1
             print(f'Desfilante de n° {desfilante.index(desfilante[-1])+1}: {tentativa[i]}?! Pelo visto não havia como substituir...')
             # entrada Core
