@@ -124,6 +124,22 @@ while tamanho:
                 movimentacao_na_matriz = input().split(', ')
                 tamanho = True
                 movimentos = []
+
+# começar a imprimir os movimentos da pior nota
+print(f'''{pessoas_notas[0][1]} - Movimentação 0:
+. . .
+. . .
+E . D\n''')
+
+lin_e = 2
+col
+
+for i in range(7):
+    letra = movimentos[i][0]
+    x = int(movimentos[i][1]) - 1
+    y = int(movimentos [i][2]) -1
+
+    for j in range(3)
             
 
 
