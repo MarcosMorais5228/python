@@ -2,6 +2,7 @@
 print('Finalmente Jamal chega no CInbebeda, pronto pra causar, quando de repente…')
 print('Jamal - "Que danado é isso?"')
 
+invalido = 0
 condicao = True
 aprendeu = False
 monitores = ['Guilherme','Henrique','Júnior','Miguel']
@@ -107,6 +108,7 @@ while tamanho:
     tamanho = False
     if len(movimentacao_na_matriz) != 7:
         print('Movimento inválido! Por favor, insira outro.')
+        invalido += 1
         movimentacao_na_matriz = input().split(', ')
         tamanho = True
     
@@ -122,24 +124,33 @@ while tamanho:
             if entrada_valida:
                 if len(movimentos[i]) != 3 or movimentos[i][0] not in ['D', 'E']:
                     print('Movimento inválido! Por favor, insira outro.')
+                    invalido += 1
                     movimentacao_na_matriz = input().split(', ')
                     tamanho = True
                     entrada_valida = False
 
                 elif movimentos[i][1] not in ['1', '2', '3']:
                     print('Movimento inválido! Por favor, insira outro.')
+                    invalido += 1
                     movimentacao_na_matriz = input().split(', ')
                     tamanho = True
                     entrada_valida = False
 
                 elif movimentos[i][2] not in ['1', '2', '3']:
                     print('Movimento inválido! Por favor, insira outro.')
+                    invalido += 1
                     movimentacao_na_matriz = input().split(', ')
                     tamanho = True
                     entrada_valida = False
 
 # começar a imprimir os movimentos da pior nota
-print(f'''{pessoas_notas[0][1]} - Movimentação 0:
+if invalido == 0:
+    print(f'''{pessoas_notas[0][1]} - Movimentação 0:
+. . .
+. . .
+E . D\n''')
+else:
+    print(f'''\n{pessoas_notas[0][1]} - Movimentação 0:
 . . .
 . . .
 E . D\n''')
