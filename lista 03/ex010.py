@@ -21,6 +21,11 @@ for i in range(4):
     if pessoas_notas[i][0] != monitores[i]:
         condicao = False
 
+#volta para ordem de entrada
+pessoas_notas = []
+for i in range(0,8,2):
+    pessoas_notas.append([entrada[i], int(entrada[i+1])])
+
 # testa nomes    
 while condicao == False:
     print('Insira nomes válidos.')
@@ -36,16 +41,19 @@ while condicao == False:
         if pessoas_notas[i][0] != monitores[i]:
             condicao = False
 
+
+
+# avaliacao jamal
+for i in range(4):
+    if pessoas_notas[i][1] == 10:
+        print(f'O monitor {pessoas_notas[i][0]} é diferenciado! Teve a aprovação do próprio Jamal.')
+
 # ordenar por notas
 for i in range(4):
     pessoas_notas[i][0], pessoas_notas[i][1] = int(pessoas_notas[i][1]), pessoas_notas[i][0]
 
 pessoas_notas.sort()
 
-# avaliacao jamal
-for i in range(4):
-    if pessoas_notas[i][0] == 10:
-        print(f'O monitor {pessoas_notas[i][1]} é diferenciado! Teve a aprovação do próprio Jamal.')
 print(f'Jamal avaliou a situação dos monitores e viu que {pessoas_notas[0][1]} é o mais necessitado.')
 
 #fala e passos jamal
@@ -204,9 +212,9 @@ elif erros == 1:
         movimentos.append(list(movimentacao_na_matriz[i]))
     
     print(f'''{pessoas_notas[0][1]} - Movimentação 0:
-    . . .
-    . . .
-    E . D\n''')
+. . .
+. . .
+E . D\n''')
 
     lin_e = 2
     col_e = 0
