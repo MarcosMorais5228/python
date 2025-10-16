@@ -57,10 +57,7 @@ while componente != 'Construir!':
 
     # testa comando 
     if componente != 'Construir!':
-        matriz.append(componente.rsplit(' ', 1))
-        
-    
-
-    
-
-    
+        partes = componente.split()
+        quantidade = int(partes[-1])
+        nome = " ".join(partes[:-1])
+        matriz.append([nome,quantidade])
