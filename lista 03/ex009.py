@@ -66,10 +66,12 @@ elif determinante1 == determinante2:
     if desempate1 > desempate2:
         print(f'Contra todas as expectativas (inclusive as nossas), {participante1} venceu a rodada!')
         print(f'Seu momento de brilhar virou eclipse {participante2}. Melhor sorte no próximo flop!')
+        print(f'Com talento duvidoso e esforço máximo, a vitória é de {participante1}!')
     
     elif desempate2 > desempate1:
         print(f'Contra todas as expectativas (inclusive as nossas), {participante2} venceu a rodada!')
         print(f'Seu momento de brilhar virou eclipse {participante1}. Melhor sorte no próximo flop!')
+        print(f'Com talento duvidoso e esforço máximo, a vitória é de {participante2}!')
     
     elif desempate2 == desempate1:
         print('Como isso é possível?? Os participantes empataram até na rodada desempate! EU DESISTO!!!')
