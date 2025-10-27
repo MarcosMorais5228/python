@@ -96,16 +96,16 @@ Phoenix Wright: A defesa descobriu que apenas UMA outra pessoa sabia da históri
 Phoenix Wright: A pessoa que matou Arthur Sean para eliminar um rival e incriminar o outro foi você...
 Phoenix Wright: ELISSON!!!
 
-Elisson: N-NÃÃÃÃÃOOOOO! COMO... ELE TE CONTOU?! MEU PLANO ERA PERFEITO!\n''')
+Elisson: N-NÃÃÃÃÃOOOOO! COMO... ELE TE CONTOU?! MEU PLANO ERA PERFEITO!''')
             conf = True
             veredito = 'INOCENTE'
     else:
         if not digitais2:
-            print('''Phoenix Wright: A promotoria não pode sequer provar que meu cliente tocou na arma do crime! Não há digitais dele!\n''')
+            print('''Phoenix Wright: A promotoria não pode sequer provar que meu cliente tocou na arma do crime! Não há digitais dele!''')
             veredito = 'INOCENTE'
         
         elif digitais2:
-            print('''Phoenix Wright: (Droga... As digitais estão na arma e a linha do tempo da promotoria é sólida... Não tenho objeções...)\n''')
+            print('''Phoenix Wright: (Droga... As digitais estão na arma e a linha do tempo da promotoria é sólida... Não tenho objeções...)''')
             veredito = 'CULPADO'
 
 elif escolha_inicial == 'confiar':
@@ -115,13 +115,14 @@ Phoenix Wright: OBJEÇÃO!\n''')
     
     # digitais Jõao
     if not digitais2:
-        print('''Phoenix Wright: A promotoria não pode provar que meu cliente tocou na arma do crime! Não há digitais dele!\n''')
+        print('''Phoenix Wright: A promotoria não pode provar que meu cliente tocou na arma do crime! Não há digitais dele!''')
         veredito = 'INOCENTE'
     elif digitais2:
-        print('''Phoenix Wright: (Droga... As digitais estão na arma e a linha do tempo da promotoria é sólida... Estou sem argumentos!)\n''')
+        print('''Phoenix Wright: (Droga... As digitais estão na arma e a linha do tempo da promotoria é sólida... Estou sem argumentos!)''')
         veredito = 'CULPADO'
     
 # Anúncio e veredito
+print()
 print(f'''Juiz: ...Compreendo. Após analisar todas as evidências e os argumentos...
 Juiz: O veredito para o caso de João Guilherme é: {veredito}!\n''')
 
