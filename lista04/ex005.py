@@ -55,6 +55,7 @@ def teleporte(y, x):
 print('Sam: Mas que lugar é esse aqui?')
 print('Dollman: WASD... Num exclusivo de PS5? Ah, fala sério!\n')
 
+frase = 0
 sam = 100
 neil = 100
 matriz = []
@@ -85,40 +86,32 @@ while sam > 0 and neil > 0:
     
     # Sam se move
     if movimento == 'W':
-        matriz[posicao_s[0]][posicao_s[1]] = pos
-        pos = matriz[posicao_s[0]-1][posicao_s[1]]
-        matriz[posicao_s[0]-1][posicao_s[1]] = 'S'
+        if posicao_s[0] != 0 and matriz[posicao_s[0]-1][posicao_s[1]] != 'I':
+            matriz[posicao_s[0]][posicao_s[1]] = pos
+            pos = matriz[posicao_s[0]-1][posicao_s[1]]
+            matriz[posicao_s[0]-1][posicao_s[1]] = 'S'
 
-        if pos == 'F':
-            sam -= 5
-            hitsFogo += 1
-        
+
     elif movimento == 'A':
-        matriz[posicao_s[0]][posicao_s[1]] = pos
-        pos = matriz[posicao_s[0]][posicao_s[1]-1]
-        matriz[posicao_s[0]][posicao_s[1]-1] = 'S'
+        if posicao_s[1] != 0 and matriz[posicao_s[0]][posicao_s[1]-1] != 'I':
+            matriz[posicao_s[0]][posicao_s[1]] = pos
+            pos = matriz[posicao_s[0]][posicao_s[1]-1]
+            matriz[posicao_s[0]][posicao_s[1]-1] = 'S'
 
-        if pos == 'F':
-            sam -= 5
-            hitsFogo += 1
 
     elif movimento == 'S':
-        matriz[posicao_s[0]][posicao_s[1]] = pos
-        pos = matriz[posicao_s[0]+1][posicao_s[1]]
-        matriz[posicao_s[0]+1][posicao_s[1]] = 'S'
+        if posicao_s[0] != 5 and matriz[posicao_s[0]+1][posicao_s[1]] != 'I':
+            matriz[posicao_s[0]][posicao_s[1]] = pos
+            pos = matriz[posicao_s[0]+1][posicao_s[1]]
+            matriz[posicao_s[0]+1][posicao_s[1]] = 'S'
 
-        if pos == 'F':
-            sam -= 5
-            hitsFogo += 1
 
     elif movimento == 'D':
-        matriz[posicao_s[0]][posicao_s[1]] = pos
-        pos = matriz[posicao_s[0]][posicao_s[1]+1]
-        matriz[posicao_s[0]][posicao_s[1]+1] = 'S'
+        if posicao_s[1] != 5 and matriz[posicao_s[0]][posicao_s[1]+1] != 'I':    
+            matriz[posicao_s[0]][posicao_s[1]] = pos
+            pos = matriz[posicao_s[0]][posicao_s[1]+1]
+            matriz[posicao_s[0]][posicao_s[1]+1] = 'S'
 
-        if pos == 'F':
-            sam -= 5
-            hitsFogo += 1
     
     # Sam troca armamento
     elif movimento == 'Espingarda':
@@ -153,6 +146,11 @@ while sam > 0 and neil > 0:
             for i in range(6):
                 print(' '.join(str(letra) for letra in matriz[i]))
             tel = 0
+    
+    if pos == 'F':
+        sam -= 5
+        hitsFogo += 1
+        
     qtd += 1
 
     if qtd == 4 and neil > 0:
@@ -161,8 +159,9 @@ while sam > 0 and neil > 0:
         danoNeil += 15
         qtd = 0
 
-        if sam <= 40:
+        if sam <= 40 and frase == 0:
             print('Dollman: A Fragile comeu todos os criptobiontes da DHV Magalhães... Se curar não é uma opção. Tome cuidado, Sam.')
+            frase += 1
     
     if sam > 0 and neil > 0:
         movimento = input()
