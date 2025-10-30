@@ -6,21 +6,16 @@ def combate(vida_makoto, mana_makoto, sombras, atk_makoto, golpe_persona, custo_
     uso_yukari = 0
     uso_junpei = 0
 
-    vida_makoto += 50
-    if vida_makoto > 300:
-        vida_makoto = 300
-
     while vida_makoto > 0 and not todas_derrotadas(sombras):
         mais_um = True
         while mais_um and vida_makoto > 0 and not todas_derrotadas(sombras):
+            mais_um = False
             if todas_derrubadas(sombras) and vida_makoto > 0:
                 print('Mitsuru: Todos os inimigos cairam! Avancem com tudo!')
                 print('MASS DESTRUCTION!')
                 print('Mitsuru: Muito bem! Continuem a exploração.')
-                vida_makoto += 50
-                if vida_makoto > 300:
-                    vida_makoto = 300
                 return vida_makoto
+                
             else:
                 mais_um = False
                 indice_sombra_makoto = 0
@@ -41,6 +36,7 @@ def combate(vida_makoto, mana_makoto, sombras, atk_makoto, golpe_persona, custo_
                         if sombras[i][1] > 0:
                             print(f'HP {sombras[i][0]}: {sombras[i][1]} pontos de vida restantes')
                     turno += 1
+
 
         if vida_makoto > 0:
             encontrou = False
@@ -92,14 +88,43 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
     escolha = input()
     mais_um = False
 
-    if escolha not in ['persona', 'yukari', 'junpei', 'atacar']:
-        while escolha not in ['persona', 'atacar','yukari','junpei']:
-            escolha = input()
-    if mana_makoto < custo_mana and escolha == 'persona':
-        print('Makoto: Estou cansado...')
-        while escolha == 'persona' or escolha not in ['atacar','yukari','junpei']:
-            escolha = input()
+    teste = True
+    while teste:
+        teste = False
+        if escolha == 'persona':
+            if mana_makoto < custo_mana and escolha == 'persona':
+                print('Makoto: Estou cansado...')
+                teste = True
+                escolha = input()
+            
+            else:
+                teste = False
+
+        elif escolha == 'atacar':
+            teste = False
+
+        elif escolha == 'yukari':
+            if uso_yukari >= 2:
+                print('Yukari: Estou exausta, foi mal!')
+                teste = True
+                escolha = input()
+            
+            else: 
+                teste = False
         
+        elif escolha == 'junpei':
+            if uso_junpei >= 1:
+                print('Junpei: Cara, tô cansado!')
+                teste = True
+                escolha = input()
+            
+            else: 
+                teste = False
+        
+        else:
+            teste = True
+            escolha = input()
+    
     if escolha == 'persona':
         lista = [int(x) for x in input().split(' ')]
         resultado, dano = bubble_sort(lista, poder, atk_makoto)
@@ -127,6 +152,7 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
 
             if indice_s < len(sombra) and sombra[indice_s][1] <= 0:
                 sombra[indice_s][1] = 0
+                sombra[indice_s][4] = True
                 print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
 
     elif escolha == 'atacar':
@@ -135,42 +161,38 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
             sombra[indice_s][1] -= dano
             print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
             if sombra[indice_s][1] <= 0:
+                sombra[indice_s][4] = True
                 sombra[indice_s][1] = 0
                 print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
 
     elif escolha == 'yukari':
-        if uso_yukari >= 2:
-            print('Yukari: Estou exausta, foi mal!')
-        else:
-            cura = 100
-            vida_makoto += cura
-            if vida_makoto > 300:
-                vida_makoto = 300
-            uso_yukari += 1
-            print('Yukari: Aguenta ai, líder!')
-            print('Mitsuru: Bom trabalho, Yukari! Makoto se sente mais revigorado')
+        cura = 100
+        vida_makoto += cura
+        if vida_makoto > 300:
+            vida_makoto = 300
+        uso_yukari += 1
+        print('Yukari: Aguenta ai, líder!')
+        print('Mitsuru: Bom trabalho, Yukari! Makoto se sente mais revigorado')
 
     elif escolha == 'junpei':
-        if uso_junpei >= 1:
-            print('Junpei: Cara, tô cansado!')
-        else:
-            if indice_s < len(sombra) and sombra[indice_s][1] > 0:
-                dano = 100
-                sombra[indice_s][1] -= dano
-                print('Junpei: HOOOOOME RUUUUN!!')
-                print(f'Mitsuru: Acerto CRÍTICO de Junpei! {sombra[indice_s][0]} sofreu 100 de dano!')
-                if sombra[indice_s][1] <= 0:
-                    sombra[indice_s][1] = 0
-                    print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
-                else:
-                    sombra[indice_s][4] = True
-                    indice_s += 1
-                mais_um = True
-            uso_junpei += 1
-            if mais_um:
-                if not todas_derrubadas(sombras):
-                    print('MAIS UM!')
-                    print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
+        if indice_s < len(sombra) and sombra[indice_s][1] > 0:
+            dano = 100
+            sombra[indice_s][1] -= dano
+            print('Junpei: HOOOOOME RUUUUN!!')
+            print(f'Mitsuru: Acerto CRÍTICO de Junpei! {sombra[indice_s][0]} sofreu 100 de dano!')
+            if sombra[indice_s][1] <= 0:
+                sombra[indice_s][4] = True
+                sombra[indice_s][1] = 0
+                print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
+            else:
+                sombra[indice_s][4] = True
+                indice_s += 1
+            mais_um = True
+        uso_junpei += 1
+        if mais_um:
+            if not todas_derrubadas(sombras):
+                print('MAIS UM!')
+                print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
         
     return vida_makoto, mana_makoto, sombra, indice_s, mais_um, uso_yukari, uso_junpei
 
@@ -257,10 +279,19 @@ while makoto > 0:
         s[3] = poder_numero(s[3])
         s.append(False)
         sombras.append(s)
-
+    
     print('Mitsuru: Inimigos detectados, se preparem!')
     makoto = combate(makoto, mana, sombras, atk_makoto, golpe_persona, custo_mana, nome_persona)
     andares_explorados += 1
+
+    if makoto > 0:
+        makoto += 50
+        mana += 15
+        if makoto > 300:
+            makoto = 300
+        
+        if mana > 70:
+            mana = 70
 
 print("\nFIM DE JOGO")
 print(f"Andares explorados: {andares_explorados}")
