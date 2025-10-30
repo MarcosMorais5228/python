@@ -92,37 +92,42 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
     escolha = input()
     mais_um = False
 
+    if escolha not in ['persona', 'yukari', 'junpei', 'atacar']:
+        while escolha not in ['persona', 'atacar','yukari','junpei']:
+            escolha = input()
+    if mana_makoto < custo_mana and escolha == 'persona':
+        print('Makoto: Estou cansado...')
+        while escolha == 'persona' or escolha not in ['atacar','yukari','junpei']:
+            escolha = input()
+        
     if escolha == 'persona':
-        if mana_makoto < custo_mana:
-            print('Makoto: Estou cansado...')
-        else:
-            lista = [int(x) for x in input().split(' ')]
-            resultado, dano = bubble_sort(lista, poder, atk_makoto)
-            mana_makoto -= custo_mana
+        lista = [int(x) for x in input().split(' ')]
+        resultado, dano = bubble_sort(lista, poder, atk_makoto)
+        mana_makoto -= custo_mana
 
-            if indice_s < len(sombra) and sombra[indice_s][1] > 0:
-                if resultado == 'fraqueza':
-                    dano = round(1.5 * dano)
-                    print(f'Makoto: Venha {nome_persona}!')
-                    print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
-                    sombra[indice_s][4] = True
-                    if not todas_derrubadas(sombras):
-                        print('MAIS UM!')
-                        print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
-                    sombra[indice_s][1] -= dano
-                    mais_um = True
-                    indice_s += 1
-                elif resultado == 'acerto':
-                    print('Makoto: Persona!')
-                    print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
-                    sombra[indice_s][1] -= dano
-                else:
-                    print('Makoto: O quê?!')
-                    print('Mitsuru: Mais foco, Makoto!')
+        if indice_s < len(sombra) and sombra[indice_s][1] > 0:
+            if resultado == 'fraqueza':
+                dano = round(1.5 * dano)
+                print(f'Makoto: Venha {nome_persona}!')
+                print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
+                sombra[indice_s][4] = True
+                if not todas_derrubadas(sombras):
+                    print('MAIS UM!')
+                    print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
+                sombra[indice_s][1] -= dano
+                mais_um = True
+                indice_s += 1
+            elif resultado == 'acerto':
+                print('Makoto: Persona!')
+                print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
+                sombra[indice_s][1] -= dano
+            else:
+                print('Makoto: O quê?!')
+                print('Mitsuru: Mais foco, Makoto!')
 
-                if indice_s < len(sombra) and sombra[indice_s][1] <= 0:
-                    sombra[indice_s][1] = 0
-                    print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
+            if indice_s < len(sombra) and sombra[indice_s][1] <= 0:
+                sombra[indice_s][1] = 0
+                print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
 
     elif escolha == 'atacar':
         if indice_s < len(sombra) and sombra[indice_s][1] > 0:
@@ -166,7 +171,7 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
                 if not todas_derrubadas(sombras):
                     print('MAIS UM!')
                     print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
-
+        
     return vida_makoto, mana_makoto, sombra, indice_s, mais_um, uso_yukari, uso_junpei
 
 # turno das sombras
