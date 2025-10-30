@@ -136,10 +136,14 @@ def turno_makoto(vida_makoto, mana_makoto, sombra, indice_s, atk_makoto, golpe, 
                 print(f'Makoto: Venha {nome_persona}!')
                 print(f'Mitsuru: Makoto acertou {sombra[indice_s][0]} causando {dano} de dano!')
                 sombra[indice_s][4] = True
+                sombra[indice_s][1] -= dano
+                if sombra[indice_s][1] <= 0:
+                    sombra[indice_s][1] = 0
+                    print(f'Mitsuru: {sombra[indice_s][0]} foi derrotado!')
                 if not todas_derrubadas(sombras):
                     print('MAIS UM!')
                     print('Mitsuru: Você acertou uma fraqueza! Continue no ataque!')
-                sombra[indice_s][1] -= dano
+
                 mais_um = True
                 indice_s += 1
             elif resultado == 'acerto':
