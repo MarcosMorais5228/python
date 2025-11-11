@@ -38,11 +38,14 @@ if valor_conta != 0:
     # guardar quantiade de notas usadas
     for c in range(5):
         qnotas.append(qnotas1.count(notas[c]))
+elif valor_conta == 0:
+    comb = 1
+    qnotas = [0, 0, 0, 0, 0]
 else:
     comb = 0
     qnotas = [0, 0, 0, 0, 0]
 
-if comb == 0:
+if comb == 0 and valor_conta != 0:
     print('\nInfelizmente, não há como pagar essa conta com as notas disponíveis.')
 
 elif comb == 1:
