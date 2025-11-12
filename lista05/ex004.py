@@ -31,6 +31,11 @@ n = int(input())
 tum1 = int(input())
 tum2 = int(input())
 
+while tum1 > n or tum2 > n or tum1 == 0 or tum2 == 0:
+    print(f'Rogério e Chaguinha não encontraram o túmulo ocupado na posição ({tum1}, {tum2}). Assim eles nunca vão conseguir sair do cemitério!')
+    tum1 = int(input())
+    tum2 = int(input())
+
 # guardar a posição do túmulo
 tum = (tum1, tum2)
 
