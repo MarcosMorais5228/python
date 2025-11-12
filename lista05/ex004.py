@@ -9,9 +9,9 @@ def resolver(tabuleiro, linha, n, tumulo):
         return 1  
 
     total = 0
-    for coluna in range(1, n + 1):
-        if (tumulo != (linha, coluna)) and bota(tabuleiro, linha, coluna):
-            tabuleiro[linha] = coluna
+    for i in range(1, n + 1):
+        if (tumulo != (linha, i)) and bota(tabuleiro, linha, i):
+            tabuleiro[linha] = i
             total += resolver(tabuleiro, linha + 1, n, tumulo)
             tabuleiro[linha] = 0
     return total
