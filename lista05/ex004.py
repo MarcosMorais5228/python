@@ -1,4 +1,4 @@
-# função que monta a lista e posições (excluindo a primeira para não ser 0-based) e chamada função para resolver
+# função que monta a lista de posições (excluindo a primeira para não ser 0-based) e chamada função para resolver
 def cemiterio(n, tumulo):
     tabuleiro = [0] * (n + 1)
     return resolver(tabuleiro, 1, n, tumulo)
