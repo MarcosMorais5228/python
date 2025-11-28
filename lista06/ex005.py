@@ -1,5 +1,9 @@
 # checar permutação
 def permutacao(s, nome):
+    s = s.lower()
+    s = s.replace(' ', '')
+    nome = nome.lower()
+    nome = nome.replace(' ', '')
     if len(s) != len(nome):
         return False
 
@@ -145,7 +149,7 @@ while entrada != 'FIM DAS INSCRIÇÕES':
                     }
                 
             else: 
-                print(f'Eita, climão! Parece que o histórico de polêmicas de {cantor} falou mais alto. A produção barrou a entrada e aqui no Brasil ela não canta!')
+                print(f'Eita, climão! Parece que o histórico de polêmicas de Azealia Banks falou mais alto. A produção barrou a entrada e aqui no Brasil ela não canta!')
 
 if len(cadastros) > 1:
     # primeira fase
