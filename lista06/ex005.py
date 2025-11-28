@@ -147,146 +147,149 @@ while entrada != 'FIM DAS INSCRIÇÕES':
             else: 
                 print(f'Eita, climão! Parece que o histórico de polêmicas de {cantor} falou mais alto. A produção barrou a entrada e aqui no Brasil ela não canta!')
 
+if len(cadastros) > 1:
+    # primeira fase
+    placar = gerar_placar(cadastros)
+    dueladoras = ()
+    for i in range(len(placar)):
+        dueladoras += (placar[i][0],)
+    print('\n=== PLACAR DA 1ª FASE ===')
+    for diva, pontos, x in placar:
+        print(f'{diva} --- {pontos}')
+    print()
 
-# primeira fase
-placar = gerar_placar(cadastros)
-dueladoras = ()
-for i in range(len(placar)):
-    dueladoras += (placar[i][0],)
-print('\n=== PLACAR DA 1ª FASE ===')
-for diva, pontos, x in placar:
-    print(f'{diva} --- {pontos}')
-print()
+    # segunda fase
+    divas_para_duelo = ()
+    for diva in dueladoras:
+        if diva in conflitos:
+            for rival in conflitos[diva]:
+                if rival in dueladoras and (rival, diva) not in divas_para_duelo:
+                    divas_para_duelo += ((diva, rival),)
 
-# segunda fase
-divas_para_duelo = ()
-for diva in dueladoras:
-    if diva in conflitos:
-        for rival in conflitos[diva]:
-            if rival in dueladoras and (rival, diva) not in divas_para_duelo:
-                divas_para_duelo += ((diva, rival),)
+    if len(divas_para_duelo) > 0:
+        print('SALTO ALTO NO TABLADO! HORA DO DUELO!')
 
-if len(divas_para_duelo) > 0:
-    print('SALTO ALTO NO TABLADO! HORA DO DUELO!')
+        n = 0
+        while len(divas_para_duelo) > n:
+            if divas_para_duelo[n][0] in cadastros and divas_para_duelo[n][1] in cadastros: 
+                print(f'DRAMA! A rivalidade entre {divas_para_duelo[n][0]} e {divas_para_duelo[n][1]} vai ser resolvida no palco, AGORA!')
+                
+                if cadastros[divas_para_duelo[n][0]]['pontos'] > cadastros[divas_para_duelo[n][1]]['pontos']:
+                    print(f'Eliminada(s): {divas_para_duelo[n][1]}')
+                    cadastros.pop(divas_para_duelo[n][1])
+                
+                elif cadastros[divas_para_duelo[n][0]]['pontos'] < cadastros[divas_para_duelo[n][1]]['pontos']:
+                    print(f'Eliminada(s): {divas_para_duelo[n][0]}')
+                    cadastros.pop(divas_para_duelo[n][0])
+                
+                elif cadastros[divas_para_duelo[n][0]]['pontos'] == cadastros[divas_para_duelo[n][1]]['pontos']:
+                    print(f'Eliminada(s): {divas_para_duelo[n][0]} e {divas_para_duelo[n][1]}')
+                    cadastros.pop(divas_para_duelo[n][1])
+                    cadastros.pop(divas_para_duelo[n][0])
 
-    n = 0
-    while len(divas_para_duelo) > n:
-        if divas_para_duelo[n][0] in cadastros and divas_para_duelo[n][1] in cadastros: 
-            print(f'DRAMA! A rivalidade entre {divas_para_duelo[n][0]} e {divas_para_duelo[n][1]} vai ser resolvida no palco, AGORA!')
-            
-            if cadastros[divas_para_duelo[n][0]]['pontos'] > cadastros[divas_para_duelo[n][1]]['pontos']:
-                print(f'Eliminada(s): {divas_para_duelo[n][1]}')
-                cadastros.pop(divas_para_duelo[n][1])
-            
-            elif cadastros[divas_para_duelo[n][0]]['pontos'] < cadastros[divas_para_duelo[n][1]]['pontos']:
-                print(f'Eliminada(s): {divas_para_duelo[n][0]}')
-                cadastros.pop(divas_para_duelo[n][0])
-            
-            elif cadastros[divas_para_duelo[n][0]]['pontos'] == cadastros[divas_para_duelo[n][1]]['pontos']:
-                print(f'Eliminada(s): {divas_para_duelo[n][0]} e {divas_para_duelo[n][1]}')
-                cadastros.pop(divas_para_duelo[n][1])
-                cadastros.pop(divas_para_duelo[n][0])
+            n += 1
 
-        n += 1
-
-    # resultado segunda fase
-    if len(cadastros) > 0:
-        placar = gerar_placar(cadastros)
-        print('\n=== PLACAR DA 2ª FASE ===')
-        for diva, pontos, x in placar:
-            print(f'{diva} --- {pontos}')
-        print()
-
-else:
-    print('O palco estava montado. Os holofotes, ligados. Mas o conflito não apareceu. Fase 2 cancelada: as divas escolheram reinar em paz.\n')
-
-if len(cadastros) != 0:
-    # terceira fase
-    habilidades_ativas = False
-    for diva, x, x in placar:
-        if diva in ('Lady Gaga', 'Beyoncé', 'Anitta'):
-            habilidades_ativas = True
-
-    if habilidades_ativas and len(cadastros) > 0:
-        print('O PALCO VAI TREMER! HORA DAS JOGADAS ESPECIAIS!')
-
-        # Lady Gaga - Poker Face
-        if 'Lady Gaga' in cadastros:
-            placar_atual = gerar_placar(cadastros)
-            top3 = ()
-            i = 0
-            while i < len(placar_atual) and i < 3:
-                top3 += (placar_atual[i][0],)
-                i += 1
-            if 'Lady Gaga' not in top3:
-                alvo_encontrado = False
-                j = len(placar_atual) - 1
-                while j >= 0:
-                    diva_nome, pontos, pop = placar_atual[j]
-                    condicao_pop = pop <= 1.25 * cadastros['Lady Gaga']['popularidade']
-                    if diva_nome != 'Lady Gaga' and condicao_pop and not alvo_encontrado:
-                        alvo = diva_nome
-                        alvo_encontrado = True
-                        cadastros['Lady Gaga']['pontos'] += cadastros[alvo]['pontos']
-                        print(f'ARRASOU! O blefe de Lady Gaga funcionou! Ela enganou os jurados com seu "Poker Face" e roubou a cena de {alvo}!')
-                        cadastros.pop(alvo)
-                    j -= 1
-                if not alvo_encontrado:
-                    print('QUE REVIRAVOLTA! O público não caiu no "Poker Face" de Lady Gaga! A farsa foi descoberta e ela está eliminada!')
-                    cadastros.pop('Lady Gaga')
-
-        # Beyoncé - Formation
-        if 'Beyoncé' in cadastros and len(cadastros) >= 3:
-            placar_atual = gerar_placar(cadastros)
-            mais_fracas = ()
-            j = len(placar_atual) - 1
-            while j >= 0 and len(mais_fracas) < 2:
-                diva_nome, pontos, pop = placar_atual[j]
-                if diva_nome != 'Beyoncé':
-                    mais_fracas += ((diva_nome, pontos),)
-                j -= 1
-            soma = mais_fracas[0][1] + mais_fracas[1][1]
-            if soma <= cadastros['Beyoncé']['pontos']:
-                k = 0
-                while k < 2:
-                    diva_nome, _ = mais_fracas[k]
-                    cadastros[diva_nome]['pontos'] = int(cadastros[diva_nome]['pontos']*1.1)
-                    k += 1
-                cadastros['Beyoncé']['pontos'] += soma
-                print('PAREM TUDO! Queen Bey ativou a "Formation"! Ela reorganizou o jogo, elevou as novatas e saiu ainda mais forte!')
-            else:
-                print('CHOQUE! A estratégia de Beyoncé foi ousada demais! A "Formation" não convenceu e ela foi desclassificada por manipulação!')
-                cadastros.pop('Beyoncé')
-
-        # Anitta - Envolver
-        if 'Anitta' in cadastros and len(cadastros) > 1:
-            placar_atual = gerar_placar(cadastros)
-            lider = placar_atual[0][0]
-            i = 0
-            condicao = False
-            while i < len(placar_atual) and not condicao:
-                if lider != 'Anitta' and cadastros['Anitta']['popularidade'] >= 0.9 * cadastros[lider]['popularidade']:
-                    condicao = True
-                i += 1
-            if condicao:
-                diff = cadastros[lider]['pontos'] - cadastros['Anitta']['pontos']
-                pontos_transferidos = float(0.25 * diff)
-                cadastros['Anitta']['pontos'] += int(pontos_transferidos)
-                cadastros[lider]['pontos'] -= round(pontos_transferidos)
-                print(f'A PATROA TÁ ON! Anitta usou "Envolver" e fez {lider} dançar conforme sua música, virando o placar a seu favor!')
-            else:
-                print('DEU RUIM! A tentativa de "Envolver" de Anitta não funcionou! O público não comprou a ideia.')
-
-        # resuçtado terceira fase
-        placar_final = gerar_placar(cadastros)
-        print('\n=== PLACAR DA 3ª FASE ===')
-        for diva, pontos, x in placar_final:
-            print(f'{diva} --- {pontos}')
+        # resultado segunda fase
+        if len(cadastros) > 0:
+            placar = gerar_placar(cadastros)
+            print('\n=== PLACAR DA 2ª FASE ===')
+            for diva, pontos, x in placar:
+                print(f'{diva} --- {pontos}')
+            print()
 
     else:
-        placar_final = gerar_placar(cadastros)
-        print('Silêncio no palco... Nenhuma habilidade especial foi ativada.')
+        print('O palco estava montado. Os holofotes, ligados. Mas o conflito não apareceu. Fase 2 cancelada: as divas escolheram reinar em paz.\n')
 
+    if len(cadastros) != 0:
+        # terceira fase
+        habilidades_ativas = False
+        for diva, x, x in placar:
+            if diva in ('Lady Gaga', 'Beyoncé', 'Anitta'):
+                habilidades_ativas = True
+
+        if habilidades_ativas and len(cadastros) > 0:
+            print('O PALCO VAI TREMER! HORA DAS JOGADAS ESPECIAIS!')
+
+            # Lady Gaga - Poker Face
+            if 'Lady Gaga' in cadastros:
+                placar_atual = gerar_placar(cadastros)
+                top3 = ()
+                i = 0
+                while i < len(placar_atual) and i < 3:
+                    top3 += (placar_atual[i][0],)
+                    i += 1
+                if 'Lady Gaga' not in top3:
+                    alvo_encontrado = False
+                    j = len(placar_atual) - 1
+                    while j >= 0:
+                        diva_nome, pontos, pop = placar_atual[j]
+                        condicao_pop = pop <= 1.25 * cadastros['Lady Gaga']['popularidade']
+                        if diva_nome != 'Lady Gaga' and condicao_pop and not alvo_encontrado:
+                            alvo = diva_nome
+                            alvo_encontrado = True
+                            cadastros['Lady Gaga']['pontos'] += cadastros[alvo]['pontos']
+                            print(f'ARRASOU! O blefe de Lady Gaga funcionou! Ela enganou os jurados com seu "Poker Face" e roubou a cena de {alvo}!')
+                            cadastros.pop(alvo)
+                        j -= 1
+                    if not alvo_encontrado:
+                        print('QUE REVIRAVOLTA! O público não caiu no "Poker Face" de Lady Gaga! A farsa foi descoberta e ela está eliminada!')
+                        cadastros.pop('Lady Gaga')
+
+            # Beyoncé - Formation
+            if 'Beyoncé' in cadastros and len(cadastros) >= 3:
+                placar_atual = gerar_placar(cadastros)
+                mais_fracas = ()
+                j = len(placar_atual) - 1
+                while j >= 0 and len(mais_fracas) < 2:
+                    diva_nome, pontos, pop = placar_atual[j]
+                    if diva_nome != 'Beyoncé':
+                        mais_fracas += ((diva_nome, pontos),)
+                    j -= 1
+                soma = mais_fracas[0][1] + mais_fracas[1][1]
+                if soma <= cadastros['Beyoncé']['pontos']:
+                    k = 0
+                    while k < 2:
+                        diva_nome, _ = mais_fracas[k]
+                        cadastros[diva_nome]['pontos'] = int(cadastros[diva_nome]['pontos']*1.1)
+                        k += 1
+                    cadastros['Beyoncé']['pontos'] += soma
+                    print('PAREM TUDO! Queen Bey ativou a "Formation"! Ela reorganizou o jogo, elevou as novatas e saiu ainda mais forte!')
+                else:
+                    print('CHOQUE! A estratégia de Beyoncé foi ousada demais! A "Formation" não convenceu e ela foi desclassificada por manipulação!')
+                    cadastros.pop('Beyoncé')
+
+            # Anitta - Envolver
+            if 'Anitta' in cadastros and len(cadastros) > 1:
+                placar_atual = gerar_placar(cadastros)
+                lider = placar_atual[0][0]
+                i = 0
+                condicao = False
+                while i < len(placar_atual) and not condicao:
+                    if lider != 'Anitta' and cadastros['Anitta']['popularidade'] >= 0.9 * cadastros[lider]['popularidade']:
+                        condicao = True
+                    i += 1
+                if condicao:
+                    diff = cadastros[lider]['pontos'] - cadastros['Anitta']['pontos']
+                    pontos_transferidos = float(0.25 * diff)
+                    cadastros['Anitta']['pontos'] += int(pontos_transferidos)
+                    cadastros[lider]['pontos'] -= round(pontos_transferidos)
+                    print(f'A PATROA TÁ ON! Anitta usou "Envolver" e fez {lider} dançar conforme sua música, virando o placar a seu favor!')
+                else:
+                    print('DEU RUIM! A tentativa de "Envolver" de Anitta não funcionou! O público não comprou a ideia.')
+
+            # resuçtado terceira fase
+            placar_final = gerar_placar(cadastros)
+            print('\n=== PLACAR DA 3ª FASE ===')
+            for diva, pontos, x in placar_final:
+                print(f'{diva} --- {pontos}')
+
+        else:
+            placar_final = gerar_placar(cadastros)
+            print('Silêncio no palco... Nenhuma habilidade especial foi ativada.')
+
+else: 
+    placar_final = gerar_placar(cadastros)
+    
 # Resultado final
 print()
 if len(cadastros) == 0:
