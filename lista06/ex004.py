@@ -17,7 +17,7 @@ eras = {
 
     "Speak Now": (
         "Speak Now",
-        "Teve uma turnê mundial massiva que consolidou seu status de superestrela global, o álbum Speak Now vendeu mais de 1 milhão de cópias na primeira semana, superando qualquer outro álbum dos últimos dois anos."
+        "Teve uma turnê mundial massiva que consolidou seu status de superestrela global, o albúm Speak Now vendeu mais de 1 milhão de cópias na primeira semana, superando qualquer outro álbum dos últimos dois anos."
     ),
 
     "1989": (
