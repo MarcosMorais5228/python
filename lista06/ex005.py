@@ -176,5 +176,7 @@ if len(divas_para_duelo) > 0:
                 cadastros.pop(divas_para_duelo[n][0])
             
             elif cadastros[divas_para_duelo[n][0]]['pontos'] == cadastros[divas_para_duelo[n][1]]['pontos']:
-                print(f'Eliminada(s): {divas_para_duelo[n][0]} e  {divas_para_duelo[n][1]}')
+                print(f'Eliminada(s): {divas_para_duelo[n][0]} e {divas_para_duelo[n][1]}')
                 cadastros.pop(divas_para_duelo[n][1])
+        
+        print(divas_para_duelo)
