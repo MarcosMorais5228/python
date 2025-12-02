@@ -199,10 +199,9 @@ if len(cadastros) > 1:
             print('\n=== PLACAR DA 2ª FASE ===')
             for diva, pontos, x in placar:
                 print(f'{diva} --- {pontos}')
-            print()
 
     else:
-        print('O palco estava montado. Os holofotes, ligados. Mas o conflito não apareceu. Fase 2 cancelada: as divas escolheram reinar em paz.\n')
+        print('O palco estava montado. Os holofotes, ligados. Mas o conflito não apareceu. Fase 2 cancelada: as divas escolheram reinar em paz.')
 
     if len(cadastros) != 0:
         # terceira fase
@@ -212,7 +211,7 @@ if len(cadastros) > 1:
                 habilidades_ativas = True
 
         if habilidades_ativas and len(cadastros) > 0:
-            print('O PALCO VAI TREMER! HORA DAS JOGADAS ESPECIAIS!')
+            print('\nO PALCO VAI TREMER! HORA DAS JOGADAS ESPECIAIS!')
 
             # Lady Gaga - Poker Face
             if 'Lady Gaga' in cadastros:
@@ -254,9 +253,9 @@ if len(cadastros) > 1:
                     k = 0
                     while k < 2:
                         diva_nome, _ = mais_fracas[k]
-                        cadastros[diva_nome]['pontos'] = int(cadastros[diva_nome]['pontos']*1.1)
+                        cadastros[diva_nome]['pontos'] = float(cadastros[diva_nome]['pontos']*1.1)
                         k += 1
-                    cadastros['Beyoncé']['pontos'] += soma
+                    cadastros['Beyoncé']['pontos'] += float(soma*0.1)
                     print('PAREM TUDO! Queen Bey ativou a "Formation"! Ela reorganizou o jogo, elevou as novatas e saiu ainda mais forte!')
                 else:
                     print('CHOQUE! A estratégia de Beyoncé foi ousada demais! A "Formation" não convenceu e ela foi desclassificada por manipulação!')
@@ -275,21 +274,23 @@ if len(cadastros) > 1:
                 if condicao:
                     diff = cadastros[lider]['pontos'] - cadastros['Anitta']['pontos']
                     pontos_transferidos = float(0.25 * diff)
-                    cadastros['Anitta']['pontos'] += int(pontos_transferidos)
-                    cadastros[lider]['pontos'] -= round(pontos_transferidos)
+                    cadastros['Anitta']['pontos'] += float(pontos_transferidos)
+                    cadastros[lider]['pontos'] -= float(pontos_transferidos)
                     print(f'A PATROA TÁ ON! Anitta usou "Envolver" e fez {lider} dançar conforme sua música, virando o placar a seu favor!')
                 else:
                     print('DEU RUIM! A tentativa de "Envolver" de Anitta não funcionou! O público não comprou a ideia.')
 
-            # resuçtado terceira fase
+            # resultado terceira fase
             placar_final = gerar_placar(cadastros)
             print('\n=== PLACAR DA 3ª FASE ===')
             for diva, pontos, x in placar_final:
-                print(f'{diva} --- {pontos}')
+                print(f'{diva} --- {int(pontos)}')
 
         else:
             placar_final = gerar_placar(cadastros)
-            print('Silêncio no palco... Nenhuma habilidade especial foi ativada.')
+            if len(cadastros) > 1:
+                print()
+                print('Silêncio no palco... Nenhuma habilidade especial foi ativada.')
 
 else: 
     placar_final = gerar_placar(cadastros)

@@ -9,13 +9,81 @@ eras = {
     "Prism": {"Diva": "Katy Perry", "Musicas": ("Roar", "Legendary Lovers", "Birthday", "Walking on Air", "Unconditionally", "Dark Horse", "This Is How We Do", "International Smile", "Ghost", "Love Me", "This Moment", "Double Rainbow", "By theGrace of God")}
 }
 
+divas_musicas = {
+    'Dua Lipa' : ("Future Nostalgia",
+"Don't Start Now",
+"Cool","Physical",
+"Levitating",
+"Pretty Please",
+"Hallucinate",
+"Love Again",
+"Break My Heart",
+"Good in Bed",
+"Boys Will Be Boys",
+"Fever", "End of an Era",
+"Houdini",
+"Training Season",
+"These Walls",
+"Whatcha Doing",
+"French Exit",
+"Illusion",
+"Falling Forever",
+"Anything for Love",
+"Maria",
+"Happy for You"),
+    'Olivia Rodrigo' : ("Brutal","Traitor",
+"Drivers License",
+"1 Step Forward, 3 Steps Back",
+"Deja Vu",
+"Good 4 U",
+"Enough For You",
+"Happier",
+"Jealousy, Jealousy",
+"Favorite Crime",
+"Hope Ur Ok", "All-American Bitch",
+"Bad Idea Right?", 
+"Vampire", 
+"Lacy", 
+"Ballad Of A Homeschooled Girl",
+ "Making The Bed", 
+"Logical", 
+"Get Him Back!", 
+"Love Is Embarrassing", 
+"The Grudge", 
+"Pretty Isn't Pretty", 
+"Teenage Dream"),
+    'Katy Perry' : ("Teenage Dream", 
+"Last Friday Night (T.G.I.F.)", 
+"California Gurls", 
+"Firework", 
+"Peacock", 
+"Circle the Drain", 
+"The One That Got Away", 
+"E.T.", 
+"Who Am I Living For?", 
+"Pearl", 
+"Hummingbird Heartbeat", 
+"Not Like the Movies", "Roar", 
+"Legendary Lovers", 
+"Birthday", 
+"Walking on Air", 
+"Unconditionally", 
+"Dark Horse", 
+"This Is How We Do", 
+"International Smile", 
+"Ghost", 
+"Love Me", 
+"This Moment", 
+"Double Rainbow", 
+"By theGrace of God")
+}
+
 divas = ("Dua Lipa", "Olivia Rodrigo", "Katy Perry")
 divas_conjunto = {}
 i = 0
 while i < len(divas):
     divas_conjunto[divas[i]] = 1
     i = i + 1
-
 
 dados_divas = {}
 i = 0
@@ -259,7 +327,7 @@ def processar_parte1(eras, divas_conjunto, dados_divas, contador_musicas_por_era
                 
             # validação se repete músia
             if valido:
-                if musica in musicas_aceitas_parte1:
+                if musica in musicas_aceitas_parte1 and musica != 'Teenage Dream':
                     print("A musica ja foi mencionada")
                     valido = 0
 
@@ -361,7 +429,7 @@ def processar_parte2(sistema_parado, musicas_aceitas_parte1, dados_divas, diva_c
                     musica = partes[0]
                     diva_bruta = partes[1]
                     
-                    if musica not in musicas_aceitas_parte1:
+                    if musica not in musicas_aceitas_parte1 or musica not in divas_musicas[diva_bruta]:
                         print("Essa musica não pertence ao catálogo, tente outra")
                         valido = 0
 
@@ -480,7 +548,7 @@ def processar_parte3(sistema_parado, divas_conjunto, divas, dados_divas, diva_ca
                         valido = 0 
 
                     if valido:
-                        if diva_descriptografada not in divas_conjunto:
+                        if diva_descriptografada.title() not in divas_conjunto:
                             valido = 0
 
                 if valido:
@@ -488,7 +556,7 @@ def processar_parte3(sistema_parado, divas_conjunto, divas, dados_divas, diva_ca
 
                     # Contagem de votos por diva
                     votos_popular[diva_descriptografada] = votos_popular.get(diva_descriptografada, 0) + 1
-                    print(f"Voto de {fa_descriptografado} computado para {diva_descriptografada}")
+                    print(f"Voto de {fa_descriptografado.title()} computado para {diva_descriptografada.title()}")
 
                     # contagem de votos por fã
                     if diva_descriptografada not in votos_por_fa:
