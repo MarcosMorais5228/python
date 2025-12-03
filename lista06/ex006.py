@@ -293,18 +293,12 @@ def processar_parte1(eras, divas_conjunto, dados_divas, contador_musicas_por_era
                 else:
                     valido = 0
             
-            # validação da diva
-            if valido:
-                if diva not in divas_conjunto:
-                    print("Diva errada, tente novamente!")
-                    valido = 0
-            
             # validação da era em disputa
             if valido:
                 if era not in eras:
                     print("Essa Era não esta na disputa, tente novamete!")
                     valido = 0
-            
+
             # validação da música na era
             if valido:
                 musicas_da_era = eras[era]['Musicas']
@@ -319,22 +313,29 @@ def processar_parte1(eras, divas_conjunto, dados_divas, contador_musicas_por_era
                     print('Essa musica não pertence a essa ERA, tente novamente!')
                     valido = 0
 
+            # validação da diva
+            if valido:
+                if diva not in divas_conjunto:
+                    print("Diva errada, tente novamente!")
+                    valido = 0
+            
+            
             # validação da diva da era
             if valido:
                 if diva != eras[era]['Diva']:
                     print("Diva errada, tente novamente!")
                     valido = 0
                 
-            # validação se repete músia
-            if valido:
-                if musica in musicas_aceitas_parte1 and musica != 'Teenage Dream':
-                    print("A musica ja foi mencionada")
-                    valido = 0
-
             # validação de limite de músicas por era
             if valido:
                 if contador_musicas_por_era.get(era, 0) >= 3:
                     print("Quantidade maxima de musicas dessa era atingida")
+                    valido = 0
+
+            # validação se repete músia
+            if valido:
+                if musica in musicas_aceitas_parte1 and musica != 'Teenage Dream':
+                    print("A musica ja foi mencionada")
                     valido = 0
 
             if valido:
@@ -548,7 +549,9 @@ def processar_parte3(sistema_parado, divas_conjunto, divas, dados_divas, diva_ca
                         valido = 0 
 
                     if valido:
-                        if diva_descriptografada.title() not in divas_conjunto:
+                        diva_descriptografada = diva_descriptografada.title()
+                        fa_descriptografado = fa_descriptografado.title()
+                        if diva_descriptografada not in divas_conjunto:
                             valido = 0
 
                 if valido:
@@ -556,7 +559,7 @@ def processar_parte3(sistema_parado, divas_conjunto, divas, dados_divas, diva_ca
 
                     # Contagem de votos por diva
                     votos_popular[diva_descriptografada] = votos_popular.get(diva_descriptografada, 0) + 1
-                    print(f"Voto de {fa_descriptografado.title()} computado para {diva_descriptografada.title()}")
+                    print(f"Voto de {fa_descriptografado} computado para {diva_descriptografada}")
 
                     # contagem de votos por fã
                     if diva_descriptografada not in votos_por_fa:
