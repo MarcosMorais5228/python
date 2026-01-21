@@ -1,6 +1,6 @@
 from pessoa import Pessoa
 
 p1 = Pessoa('Marcos', 22)
-p2 = Pessoa('Lívia', 20)
+p2 = Pessoa('Lívia', 21)
 
 print(p2.get_ano_nascimento())
